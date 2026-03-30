@@ -28,7 +28,7 @@ class Window(QMainWindow):
 
         dlg.exec()
         
-        if dlg.checkbox.isChecked():
+        if dlg.isChecked():
             self.status_label.setText("Соглашение принято")
         else:
             self.status_label.setText("Соглашение НЕ принято")
@@ -47,6 +47,9 @@ class CustomDialog(QDialog):
         layout.addWidget(self.checkbox)
         layout.addWidget(self.buttonBox)
         self.setLayout(layout)
+
+    def isChecked(self):
+        return self.checkbox.isChecked()
 
 if __name__ == "__main__":
     app = QApplication([])

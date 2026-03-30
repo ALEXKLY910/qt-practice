@@ -24,24 +24,14 @@ class MainWindow(QMainWindow):
     def run_wizard(self):
         wizard = Wizard(self)
         if wizard.exec():
-            login = wizard.field("login")
-            password = wizard.field("password")
-            first_name = wizard.field("first_name")
-            last_name = wizard.field("last_name")
-            second_name = wizard.field("second_name")
-            reading_books_check_box = wizard.field("reading_books_check_box")
-            watching_films_check_box = wizard.field("watching_films_check_box")
-            playing_games_check_box = wizard.field("playing_games_check_box")
-            worldwide_news_check_box = wizard.field("worldwide_news_check_box")
-            regional_news_check_box = wizard.field("regional_news_check_box")
-            summary = f"Логин: {login}\nПароль: {password}\nИмя: {first_name}\nФамилия: {last_name}\nОтчество: {second_name}\nЧтение книг: {reading_books_check_box}\nПросмотр фильмов: {watching_films_check_box}\nПрохождение видеоигр: {playing_games_check_box}\nМировые СМИ: {worldwide_news_check_box}\nРегиональные СМИ: {regional_news_check_box}"
-            
+            summary = wizard.getSummary()
             self.result_label.setText(summary)
 
 
 class Wizard(QWizard):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.summary = ""
         self.addPage(Registration())
         self.addPage(Identity())
         self.addPage(Themes())
@@ -49,8 +39,21 @@ class Wizard(QWizard):
 
     def accept(self):
         QMessageBox.information(None, "Регистрация", "Регистрация пройдена")
+        login = self.field("login")
+        password = self.field("password")
+        first_name = self.field("first_name")
+        last_name = self.field("last_name")
+        second_name = self.field("second_name")
+        reading_books_check_box = self.field("reading_books_check_box")
+        watching_films_check_box = self.field("watching_films_check_box")
+        playing_games_check_box = self.field("playing_games_check_box")
+        worldwide_news_check_box = self.field("worldwide_news_check_box")
+        regional_news_check_box = self.field("regional_news_check_box")
+        self.summary = f"Логин: {login}\nПароль: {password}\nИмя: {first_name}\nФамилия: {last_name}\nОтчество: {second_name}\nЧтение книг: {reading_books_check_box}\nПросмотр фильмов: {watching_films_check_box}\nПрохождение видеоигр: {playing_games_check_box}\nМировые СМИ: {worldwide_news_check_box}\nРегиональные СМИ: {regional_news_check_box}"
         super(Wizard, self).accept()
 
+    def getSummary(self):
+        return self.summary
 
 class Registration(QWizardPage):
     def __init__(self, parent=None):

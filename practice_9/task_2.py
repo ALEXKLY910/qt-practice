@@ -32,6 +32,8 @@ if __name__ == "__main__":
     app = QApplication([])
 
     window = MainWindow()
+    window.resize(600, 500)
+
     window.show()
 
     app.exec()

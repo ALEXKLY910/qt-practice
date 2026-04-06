@@ -5,7 +5,7 @@ import pandas as pd
 
 class MainWindow(QMainWindow):
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super().__init__()
 
         graph_widget = pg.PlotWidget()
         self.setCentralWidget(graph_widget)
